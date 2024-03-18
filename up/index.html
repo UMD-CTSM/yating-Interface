@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+          <!-- Load plotly.js into the DOM -->
+          <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+          <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js'></script>
+          <script src='efficiency.js'></script>
+          <script src='table.js'></script>
+
+          <style>
+
+              h1 {
+                    font-size: 36px;
+                    margin: 30px 300px 30px 300px; // top, right, bottom, left
+                  }
+
+              h2 {
+                font-size: 28px;
+                margin: 30px 300px 30px 300px; // top, right, bottom, left
+              }
+
+              h3 {
+                font-size: 20px;
+                margin: 30px 300px 15px 300px; // top, right, bottom, left
+              }
+
+              p {
+                font-size: 16px;
+                margin: 30px 300px 30px 300px; // top, right, bottom, left
+                text-align: justify;
+                text-justify: inter-word;
+              }
+
+              ul {
+                list-style-type: none;
+                margin: 30px 310px 50px 260px; // top, right, bottom, left
+                padding: 0;
+                text-align: justify;
+                text-justify: inter-word;
+              };
+
+          </style>
+
+    </head>
+
+   <body>
+     <h1 style="text-align:center">Case Study: Union Pacific Railroads</h1>
+
+     <p style="text-align:center"> Bilal M. Ayyub (PI); Yating Zhang; Sherief Elsibaie; Yujie Mao; Majed Hamed;
+       Magdy Elsibaie</p>
+
+     <p>Union Pacific (UP) is the largest railroad in North America, covering 23 states
+       in the western two-thirds of the United States.</p>
+
+     <h3>Terminology</h3>
+     <ul>
+		<li>A <b>Network</b> is any connected system, where connection points can be repesented by <b>nodes</b> and connections
+		  can be represented by <b>links</b>.</li> <!--- of different weights (in link units). The weights can be physical distances or other
+		   properties of the link.</li> !--->
+		<li>A <b>Path</b> between node <i>i</i> and node <i>j</i> is the number of links <!---in link units !---> in a set of
+		  links that connect the two nodes. The <b>Shortest Path</b> between node <i>i</i> and node <i>j</i> is the smallest path of all paths between
+		  node <i>i</i> and node <i>j</i>.</li>
+		<li><b>Node eccentricity</b> of node <i>i</i> is the maximum value of the set of shortest paths (in link units) from node <i>i</i>
+           to all other nodes. Eccentricity can be used to compute the network's <b>radius</b>, which is its minimum node eccentricity
+		    and <b>diameter</b>, which is the maximum node eccentricity, of a network as well as identify its geometric center.</li>
+		<li><b>Pairwise efficiency</b> is a charactertistic between any node <i>i</i> to node <i>j</i> and characterizes how well connected
+		  they are to each other. It is calculated as the reciprocal of the shortest path (in link units) between those two nodes.</li>
+		<li><b>Node efficiency</b> of a node <i>i</i> characterizes how well connected it is to all other nodes in a network. It is
+		   calculated as the average of all node pairwise efficiency values between node <i>i</i> and all other nodes.</li>
+		<li><b>Network efficiency</b> of a network characterizes how well connected the network is in general. It is
+		   calculated as the average of all node efficiency values for all nodes on the network.</li>
+  </ul>
+
+     <h3>Effeciency, Eccentricity and Natural Hazards</h3>
+     <p>The graph below shows 31,920 nodes within the UP network.
+        Node(s) with the lowest eccentricity value are usually more central, while nodes with higher eccentricity are more peripheral.
+        In contrast, node(s) with the highest efficiency value are more central, while nodes with lower eccentricity are usually
+        in long chains or at the periphery of a network. </p>
+
+
+     <div id='efficiency'></div>
+     <div id='table'></div>
+
+     <h3>References</h3>
+     <ul>
+       <li>Hamed, M., Mao, Y., Ayyub, B.M., Elsibaie, M., and Omar, T., 2022, <q>Connectedness Efficiency Analysis of
+          Weighted U. S. Freight Railroad Networks,</q> ASCE-ASME Journal of Risk and Uncertainty in Engineering Systems
+           Part B: Mechanical Engineering, https://doi.org/10.1115/1.4054326.</li><br>
+       <li>Saadat, Y., Ayyub, B.M., Helgeson, J., and Saleem, S., 2021, <q>Transportation Resilience Models for Supply
+          Chain Analysis Using Complex Network Theory (CNT),</q> ASME Joint Rail Conference (JRC2021), April 20-21, 2021,
+           https://event.asme.org/Joint-Rail-Conference.</li><br>
+       <li>Mao, Y., Ayyub, B.M., Elsibaie, M., Saadat, Y., and Omar, T., 2021, <q>Optimizing Topology of Rail Networks:
+          The Case of Reclassing, Acquisition and Repurposing of Tracks,</q> ASME Joint Rail Conference (JRC2021),
+           April 20-21, 2021, https://event.asme.org/Joint-Rail-Conference</li><br>
+       <li>Cao, S. Ayyub, B.M., Saadat, Y., Elsibaie, M., and Omar, T., 2021, <q>Topological Analytics for Vulnerability
+          and Recovery Enhancements After Disruption of Rail Networks,</q> ASME Joint Rail Conference (JRC2021), April 20-21,
+           2021, https://event.asme.org/Joint-Rail-Conference</li><br>
+       <li>Hamed, M.A., Ayyub, B.M., Elsibaie, M., Mao, Y., Saadat, Y., Omar, T., 2021, <q>Weights and their Consideration
+          in Topological Analysis of Rail Networks,</q> ASME Joint Rail Conference (JRC2021), April 20-21, 2021,
+           https://event.asme.org/Joint-Rail-Conference</li><br>
+       <li>Zhang Y., Ayyub B.M., Saadat, Y., Zhang D., and Huang H., 2020, <q>A double-weighted vulnerability assessment
+          model for metrorail transit networks and its application in Shanghai metro,</q> International Journal of Critical
+           Infrastructure Protection, (29) 2020, 100358, https://doi.org/10.1016/j.ijcip.2020.100358.</li><br>
+       <li>Saadat, Y., Ayyub, B. M., Zhang, Y., Zhang, D., and Huang, H., 2020, <q>Resilience-based Strategies for Topology
+          Enhancement and Recovery of Metrorail Transit Networks,</q> ASCE-ASME J. Risk Uncertainty Eng. Syst., Part A: Civ.
+           Eng., ASCE. 2020, 6(2): 04020017 https://doi.org/10.1061/AJRUA6.0001057</li><br>
+       <li>Zhang, Y. J., Ayyub, B. M., Zhang, D. M., Huang, H. W., Saadat, Y., 2019. <q>Impact of Water Level Rise on Urban
+          Infrastructures: Washington, DC, and Shanghai as Case Studies,</q> Risk Analysis, Wiley,
+           https://doi.org/10.1111/risa.13390</li><br>
+       <li>Zhang, F., Du, F., Huang, H., Zhang, D., Ayyub, B. M., and Beer, M., 2018. <q>Resiliency Assessment of Urban Rail
+          Transit Networks: Shanghai Metro as an Example,</q> Safety Science, Elsevier, Volume 106, July 2018, Pages 230-243,
+           https://doi.org/10.1016/j.ssci.2018.03.023.</li><br>
+   </ul>
+
+   <p> Last update: 12/1/2022</p>
+
+   </body>
+
+</html>
